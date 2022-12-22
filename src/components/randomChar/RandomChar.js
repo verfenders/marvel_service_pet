@@ -1,8 +1,8 @@
 import { Component } from 'react/cjs/react.development';
-import Spinner from '../spinner/spinner';
+import Spinner from '../spinner/Spinner';
 import MarvelService from '../../services/MarvelService';
 import './randomChar.scss';
-import ErrorMessage from '../errorMessage/errorMessage';
+import ErrorMessage from '../errorMessage/ErrorMessage';
 import mjolnir from '../../resources/img/mjolnir.png';
 
 class RandomChar extends Component {
