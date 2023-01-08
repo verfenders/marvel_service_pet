@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import React, { Component } from 'react';
 import Spinner from '../spinner/Spinner';
 import ErrorMessage from '../errorMessage/ErrorMessage';
 import MarvelService from '../../services/MarvelService';
@@ -6,6 +6,10 @@ import './charList.scss';
 
 class CharList extends Component {
 
+    // constructor(props) {
+    //     super(props)
+    //     // this.myRef = React.createRef();
+    // }
     state = {
         charList: [],
         loading: true,
@@ -17,8 +21,10 @@ class CharList extends Component {
 
     marvelService = new MarvelService();
 
+
     componentDidMount() {
         this.onRequest();
+        // this.myRef.current.focus();
     }
 
     onRequest = (offset) => {
@@ -63,8 +69,31 @@ class CharList extends Component {
 
     // Этот метод создан для оптимизации, 
     // чтобы не помещать такую конструкцию в метод render
+
+
+    // setRef = (ref) => {
+    //     this.myRef = ref;
+    // }
+
+    // focusRef = (id) => {
+    //     if (this.myRef) {
+    //         this.myRef.focus();
+    //     }
+    // }
+
+
+    itemRefs = [];
+
+    setRef = (ref) => {
+        this.itemRefs.push(ref);
+    }
+
+    focusOnItem = (id) => {
+        this.itemRefs[id].focus();
+    }
+
     renderItems(arr) {
-        const items = arr.map((item) => {
+        const items = arr.map((item, i) => {
             let imgStyle = { 'objectFit': 'cover' };
             if (item.thumbnail === 'http://i.annihil.us/u/prod/marvel/i/mg/b/40/image_not_available.jpg') {
                 imgStyle = { 'objectFit': 'unset' };
@@ -74,8 +103,16 @@ class CharList extends Component {
                 <li
                     className="char__item"
                     tabIndex={0}
+                    ref={this.setRef}
                     key={item.id}
-                    onClick={() => this.props.onCharSelected(item.id)}>
+
+                    onClick={() => {
+                        this.props.onCharSelected(item.id)
+                        this.focusOnItem(i);
+
+                    }}
+
+                >
                     <img src={item.thumbnail} alt={item.name} style={imgStyle} />
                     <div className="char__name">{item.name}</div>
                 </li>
