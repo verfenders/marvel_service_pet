@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useRef } from 'react';
+import React, {  useState, useEffect, useRef } from 'react';
 import Spinner from '../spinner/Spinner';
 import PropTypes from 'prop-types';
 import ErrorMessage from '../errorMessage/ErrorMessage';
